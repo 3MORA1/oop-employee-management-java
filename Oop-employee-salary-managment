@@ -1,0 +1,82 @@
+​1. ملف Employee.java (داخل package emp;)
+
+package emp;
+
+abstract public class Employee {
+    protected String emp_name;
+    protected int payhour;
+
+    public Employee(String name, int phour) {
+        emp_name = name;
+        payhour = phour;
+    }
+
+    public abstract int calcsal();
+}
+
+
+2. ملف Contractor.java (داخل package emp;
+
+
+package emp;
+
+public class Contractor extends Employee {
+    private int workhour;
+
+    public Contractor(int whour, String name, int phour) {
+        super(name, phour);
+        workhour = whour;
+    }
+
+    @Override
+    public int calcsal() {
+        return workhour * payhour;
+    }
+}
+
+
+
+3. ملف Fulltime.java (داخل package emp;)
+
+
+package emp;
+
+public class Fulltime extends Employee {
+    public Fulltime(String name, int phour) {
+        super(name, phour);
+    }
+
+    @Override
+    public int calcsal() {
+        return payhour * 8;
+    }
+}
+
+
+
+4. ملف Main.java (داخل package Work;)
+
+
+package Work;
+
+import emp.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Employee[] arr = new Employee[4];
+        arr[0] = new Contractor(5, "omar", 1000);
+        arr[1] = new Contractor(4, "saif", 800);
+        arr[2] = new Fulltime("ahmed", 500);
+        arr[3] = new Fulltime("mohamed", 200);
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] instanceof Contractor) {
+                System.out.println("Part time");
+                System.out.println("salary: " + arr[i].calcsal());
+            } else {
+                System.out.println("Full time");
+                System.out.println("salary: " + arr[i].calcsal());
+            }
+        }
+    }
+}
